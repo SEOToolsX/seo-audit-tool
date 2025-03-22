@@ -70,11 +70,62 @@ document.getElementById('seo-audit-form').addEventListener('submit', async funct
     }
 });
 
-// Fetch HTML content from URL
+// Fetch HTML content from URL using a CORS proxy
 async function fetchHtmlContent(url) {
-    const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
+    const proxyUrl = 'https://api.allorigins.win/get?url=';
+    const response = await fetch(`${proxyUrl}${encodeURIComponent(url)}`);
     const data = await response.json();
     return data.contents;
 }
 
-// Existing functions (meta title, meta description, headings, keyword density, image alt text, canonical URL, internal/external links, schema markup, social meta tags, readability, content length, broken links, mobile-friendliness, page speed tips)...
+// Example SEO analysis functions
+function analyzeMetaTitle(doc) {
+    const title = doc.querySelector('title');
+    if (!title) {
+        return { score: 0, message: 'No title tag found.' };
+    }
+    const titleText = title.textContent.trim();
+    const length = titleText.length;
+    if (length === 0) {
+        return { score: 0, message: 'Title tag is empty.' };
+    }
+    if (length < 50 || length > 60) {
+        return { score: 70, message: `Title tag is ${length} characters long. Aim for 50-60 characters.` };
+    }
+    return { score: 100, message: `Title tag is optimal: "${titleText}"` };
+}
+
+function analyzeMetaDescription(doc) {
+    const metaDescription = doc.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+        return { score: 0, message: 'No meta description found.' };
+    }
+    const description = metaDescription.getAttribute('content').trim();
+    const length = description.length;
+    if (length === 0) {
+        return { score: 0, message: 'Meta description is empty.' };
+    }
+    if (length < 120 || length > 160) {
+        return { score: 70, message: `Meta description is ${length} characters long. Aim for 120-160 characters.` };
+    }
+    return { score: 100, message: `Meta description is optimal: "${description}"` };
+}
+
+// Add other analysis functions here...
+
+function displayReport(report) {
+    const reportContainer = document.getElementById('report');
+    reportContainer.innerHTML = `
+        <div class="report-item">
+            <h3 class="text-xl font-semibold text-blue-600">Meta Title</h3>
+            <p class="score">Score: ${report.metaTitle.score}/100</p>
+            <p>${report.metaTitle.message}</p>
+        </div>
+        <div class="report-item">
+            <h3 class="text-xl font-semibold text-blue-600">Meta Description</h3>
+            <p class="score">Score: ${report.metaDescription.score}/100</p>
+            <p>${report.metaDescription.message}</p>
+        </div>
+        <!-- Add more report items here -->
+    `;
+            }
