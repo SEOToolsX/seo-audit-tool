@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SEO Audit Tool - Analyze your website's SEO performance and generate a detailed report.">
+    <meta property="og:title" content="SEO Audit Tool - Free Online SEO Analyzer">
+    <meta property="og:description" content="Analyze your website's SEO performance and generate a detailed report with our free SEO Audit Tool.">
+    <meta property="og:image" content="https://example.com/seo-audit-tool.jpg">
+    <title>SEO Audit Tool - Free Online SEO Analyzer</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <div class="container mx-auto p-4 max-w-4xl">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-600">SEO Audit Tool</h1>
+            <p class="text-lg text-gray-600">Analyze your website's SEO performance and generate a detailed report.</p>
+        </header>
+
+        <div class="flex justify-center mb-4">
+            <button id="toggle-mode" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">Switch to URL Mode</button>
+        </div>
+
+        <form id="seo-audit-form" class="bg-white p-6 rounded-lg shadow-md">
+            <div id="html-content-group" class="mb-4">
+                <label for="html-content" class="block text-sm font-medium text-gray-700">Paste HTML Content:</label>
+                <textarea id="html-content" rows="10" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Paste your HTML content here..." required></textarea>
+            </div>
+
+            <div id="url-group" class="mb-4 hidden">
+                <label for="site-url" class="block text-sm font-medium text-gray-700">Enter Site URL:</label>
+                <input type="url" id="site-url" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="https://example.com">
+            </div>
+
+            <div class="mb-4">
+                <label for="keywords" class="block text-sm font-medium text-gray-700">Target Keywords (comma-separated):</label>
+                <input type="text" id="keywords" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="e.g., SEO, tools, audit" required>
+            </div>
+
+            <div class="mb-4">
+                <label for="canonical-url" class="block text-sm font-medium text-gray-700">Canonical URL (optional):</label>
+                <input type="url" id="canonical-url" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="https://example.com/canonical-page">
+            </div>
+
+            <button type="submit" class="w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700 transition duration-300">Generate Report</button>
+        </form>
+
+        <div id="loading" class="hidden text-center my-8">
+            <div class="spinner border-4 border-blue-600 border-t-transparent rounded-full w-12 h-12 mx-auto animate-spin"></div>
+            <p class="mt-2 text-gray-600">Generating report...</p>
+        </div>
+
+        <div id="report" class="mt-8 bg-white p-6 rounded-lg shadow-md">
+            <!-- Report will be displayed here -->
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
